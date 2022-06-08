@@ -3,8 +3,10 @@ import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:rafa/Screens/home_page.dart';
 import 'package:rafa/auth/register.dart';
+import 'package:rafa/controller/controller.dart';
+
+import '../Screens/nav_screen/bottom_navigationbar.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({Key? key}) : super(key: key);
@@ -14,6 +16,7 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
+  MainController controller = Get.put(MainController());
   final formkey = GlobalKey<FormState>();
   final TextEditingController emailController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
@@ -22,6 +25,7 @@ class _LoginPageState extends State<LoginPage> {
 
   //firebase
   final _auth = FirebaseAuth.instance;
+  String? errorMessage;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -73,7 +77,7 @@ class _LoginPageState extends State<LoginPage> {
                       ),
                       SizedBox(height: 10),
                       TextFormField(
-                        // autovalidateMode: AutovalidateMode.always,
+                        autovalidateMode: AutovalidateMode.always,
                         controller: emailController,
                         onSaved: (value) {
                           emailController.text = value!;
@@ -107,7 +111,7 @@ class _LoginPageState extends State<LoginPage> {
                       ),
                       SizedBox(height: 10),
                       TextFormField(
-                        // autovalidateMode: AutovalidateMode.always,
+                        autovalidateMode: AutovalidateMode.always,
                         controller: passwordController,
                         onSaved: (value) {
                           passwordController.text = value!;
@@ -195,8 +199,18 @@ class _LoginPageState extends State<LoginPage> {
                         child: MaterialButton(
                           minWidth: double.infinity,
                           onPressed: () {
-                            signIn(
-                                emailController.text, passwordController.text);
+                            // controller.UserLogin();
+                            // signIn(
+                            //   emailController.text,
+                            //   passwordController.text,
+                            // );
+                            if (formkey.currentState!.validate()) {
+                              signIn(
+                                emailController.text,
+                                passwordController.text,
+                              );
+                              controller.UserLogin();
+                            }
                           },
                           child: Text(
                             "Sign In",
@@ -235,15 +249,34 @@ class _LoginPageState extends State<LoginPage> {
 
   void signIn(String email, String password) async {
     if (formkey.currentState!.validate()) {
-      await _auth
-          .signInWithEmailAndPassword(email: email, password: password)
-          .then((uid) => {
-                Fluttertoast.showToast(msg: "Login Successfull"),
-                Get.off(HomePage()),
-              })
-          .catchError((e) {
-        Fluttertoast.showToast(msg: e!.message);
-      });
+      try {
+        await _auth
+            .signInWithEmailAndPassword(email: email, password: password)
+            .then((uid) => {
+                  Fluttertoast.showToast(msg: "Login Successful"),
+                  Get.off(Bottombar()),
+                });
+      } on FirebaseAuthException catch (error) {
+        switch (error.code) {
+          case "invalid-email":
+            errorMessage = "Your email address appears to be malformed.";
+
+            break;
+          case "wrong-password":
+            errorMessage = "Your password is wrong.";
+            break;
+          case "user-not-found":
+            errorMessage = "User with this email doesn't exist.";
+            break;
+          case "user-disabled":
+            errorMessage = "User with this email has been disabled.";
+            break;
+          case "too-many-requests":
+            errorMessage = "Too many requests";
+        }
+        Fluttertoast.showToast(msg: errorMessage!);
+        print(error.code);
+      }
     }
   }
 }

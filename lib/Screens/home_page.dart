@@ -1,10 +1,14 @@
+// ignore_for_file: import_of_legacy_library_into_null_safe
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:rafa/Screens/drawer_screen.dart';
+import 'package:rafa/Screens/nav_screen/expenses_page.dart';
+import 'package:rafa/Screens/nav_screen/sales_page.dart';
 import 'package:rafa/models/user_model.dart';
+import '../controller/controller.dart';
 import '../widgets/custom_widgets.dart';
 
 class HomePage extends StatefulWidget {
@@ -15,6 +19,7 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  MainController controller = Get.put(MainController());
   User? user = FirebaseAuth.instance.currentUser;
   UserModel loggedInUser = UserModel();
 
@@ -31,7 +36,6 @@ class _HomePageState extends State<HomePage> {
     });
   }
 
-  int _currentIndex = 0;
   @override
   Widget build(BuildContext context) {
     final globalKey = GlobalKey<ScaffoldState>();
@@ -58,85 +62,10 @@ class _HomePageState extends State<HomePage> {
             children: [
               Padding(
                 padding: const EdgeInsets.only(left: 10),
-                child: Container(
-                  height: 100,
-                  child: Padding(
-                    padding: const EdgeInsets.only(top: 30),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Container(
-                          child: Row(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              IconButton(
-                                onPressed: () {
-                                  if (globalKey.currentState!.isDrawerOpen ==
-                                      false) {
-                                    globalKey.currentState!.openDrawer();
-                                  } else {
-                                    globalKey.currentState!.openDrawer();
-                                  }
-                                },
-                                icon: Icon(
-                                  Icons.menu,
-                                  size: 35,
-                                  color: Colors.white,
-                                ),
-                              ),
-                              SizedBox(width: 10),
-                              Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Text(
-                                    "Welcome",
-                                    style: GoogleFonts.openSans(
-                                        fontSize: 18, color: Colors.white),
-                                  ),
-                                  Text(
-                                    "${loggedInUser.name}",
-                                    style: GoogleFonts.openSans(
-                                        fontSize: 18,
-                                        fontWeight: FontWeight.bold,
-                                        color: Colors.white),
-                                  )
-                                ],
-                              ),
-                            ],
-                          ),
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.only(right: 20),
-                          child: Container(
-                            child: Row(
-                              children: [
-                                IconButton(
-                                    onPressed: () {},
-                                    icon: Icon(
-                                      Icons.notification_add_outlined,
-                                      size: 30,
-                                      color: Colors.white,
-                                    )),
-                                SizedBox(width: 10),
-                                // CircleAvatar(
-                                //   radius: 20,
-                                //   backgroundImage: AssetImage("assets/user.jpg"),
-                                //   backgroundColor: Colors.transparent,
-                                //)
-                                Icon(
-                                  Icons.account_circle_outlined,
-                                  size: 50,
-                                  color: Colors.white,
-                                )
-                              ],
-                            ),
-                          ),
-                        )
-                      ],
-                    ),
-                  ),
-                ),
+                child: headerContainer(
+                    globalKey: globalKey,
+                    loggedInUser: loggedInUser,
+                    controller: controller),
               ),
               SizedBox(height: 50),
               SingleChildScrollView(
@@ -144,8 +73,8 @@ class _HomePageState extends State<HomePage> {
                   // height: 550,
                   decoration: BoxDecoration(
                       borderRadius: BorderRadius.only(
-                        topLeft: Radius.circular(30),
-                        topRight: Radius.circular(30),
+                        topLeft: Radius.circular(50),
+                        topRight: Radius.circular(50),
                       ),
                       color: Colors.white),
                   child: Column(
@@ -167,7 +96,9 @@ class _HomePageState extends State<HomePage> {
                               // iconColor: Colors.purple,
                             ),
                             homeContainer(
-                              onTap: () {},
+                              onTap: () {
+                                Get.to(Sales());
+                              },
                               text: "Sales",
 
                               icon: Icon(
@@ -197,7 +128,9 @@ class _HomePageState extends State<HomePage> {
                               // iconColor: Colors.purple,
                             ),
                             homeContainer(
-                              onTap: () {},
+                              onTap: () {
+                                Get.to(Expenses());
+                              },
                               text: "Purchase",
 
                               icon: Icon(
@@ -243,43 +176,10 @@ class _HomePageState extends State<HomePage> {
                     ],
                   ),
                 ),
-              )
+              ),
             ],
           ),
         )),
-        bottomNavigationBar: BottomNavigationBar(
-          currentIndex: _currentIndex,
-          selectedItemColor: Colors.purple,
-          unselectedItemColor: Colors.grey,
-          items: [
-            BottomNavigationBarItem(
-                icon: Icon(
-                  Icons.dashboard,
-                  size: 30,
-                ),
-                label: "DASHBOARD",
-                backgroundColor: Colors.purple),
-            BottomNavigationBarItem(
-                icon: Icon(
-                  Icons.attach_money,
-                  size: 30,
-                ),
-                label: "EXPENSES",
-                backgroundColor: Colors.purple),
-            BottomNavigationBarItem(
-                icon: Icon(
-                  Icons.monetization_on,
-                  size: 30,
-                ),
-                label: "SALES",
-                backgroundColor: Colors.purple),
-          ],
-          onTap: (index) {
-            setState(() {
-              _currentIndex = index;
-            });
-          },
-        ),
       ),
     );
   }

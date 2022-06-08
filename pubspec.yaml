@@ -40,6 +40,10 @@ dependencies:
   firebase_core: ^1.17.1
   firebase_auth: ^3.3.19
   fluttertoast: ^8.0.9
+  flat_icons_flutter: ^1.0.2
+  dotted_line: ^3.1.0
+  dotted_border: ^2.0.0+2
+  font_awesome_flutter: ^10.1.0
   
 
 
