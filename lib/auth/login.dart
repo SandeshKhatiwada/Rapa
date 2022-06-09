@@ -4,6 +4,7 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:rafa/auth/register.dart';
+import 'package:rafa/auth/reset_password.dart';
 import 'package:rafa/controller/controller.dart';
 
 import '../Screens/nav_screen/bottom_navigationbar.dart';
@@ -179,7 +180,9 @@ class _LoginPageState extends State<LoginPage> {
                             ),
                           ),
                           TextButton(
-                              onPressed: () {},
+                              onPressed: () {
+                                Get.to(ResetPassword());
+                              },
                               child: Text(
                                 "Forgot Password?",
                                 style: GoogleFonts.poppins(

@@ -20,6 +20,14 @@ class MainController extends GetxController {
     });
   }
 
+  Submit() {
+    showLoding();
+    Future.delayed(const Duration(seconds: 5), () {
+      hideLoading();
+      Get.off(LoginPage());
+    });
+  }
+
   hideLoading() {
     //Get.back();
   }

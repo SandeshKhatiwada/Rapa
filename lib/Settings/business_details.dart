@@ -25,6 +25,7 @@ class BusinessDetails extends StatelessWidget {
                 child: TextFormField(
                   decoration: InputDecoration(
                       hintText: "Hulas Group",
+                      hintStyle: TextStyle(color: Colors.black26),
                       contentPadding: const EdgeInsets.only(left: 15, top: 18),
                       border: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(10),
@@ -42,6 +43,7 @@ class BusinessDetails extends StatelessWidget {
                 child: TextFormField(
                   decoration: InputDecoration(
                       hintText: "Putalisadak, Kathmandu",
+                      hintStyle: TextStyle(color: Colors.black26),
                       contentPadding: const EdgeInsets.only(left: 15, top: 18),
                       border: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(10),
@@ -59,6 +61,7 @@ class BusinessDetails extends StatelessWidget {
                 child: TextFormField(
                   decoration: InputDecoration(
                       hintText: "www.hulasgroup.com",
+                      hintStyle: TextStyle(color: Colors.black26),
                       contentPadding: const EdgeInsets.only(left: 15, top: 18),
                       border: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(10),
@@ -77,6 +80,7 @@ class BusinessDetails extends StatelessWidget {
                   keyboardType: TextInputType.phone,
                   decoration: InputDecoration(
                       hintText: "01-151515",
+                      hintStyle: TextStyle(color: Colors.black26),
                       contentPadding: const EdgeInsets.only(left: 15, top: 18),
                       border: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(10),

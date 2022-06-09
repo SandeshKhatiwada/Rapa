@@ -25,6 +25,7 @@ class PersonDetails extends StatelessWidget {
                 child: TextFormField(
                   decoration: InputDecoration(
                       hintText: "John Doe",
+                      hintStyle: TextStyle(color: Colors.black26),
                       contentPadding: const EdgeInsets.only(left: 15, top: 18),
                       border: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(10),
@@ -43,6 +44,7 @@ class PersonDetails extends StatelessWidget {
                   keyboardType: TextInputType.emailAddress,
                   decoration: InputDecoration(
                       hintText: "info@gmail.com",
+                      hintStyle: TextStyle(color: Colors.black26),
                       contentPadding: const EdgeInsets.only(left: 15, top: 18),
                       border: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(10),
@@ -61,6 +63,7 @@ class PersonDetails extends StatelessWidget {
                   keyboardType: TextInputType.phone,
                   decoration: InputDecoration(
                       hintText: "9800000000",
+                      hintStyle: TextStyle(color: Colors.black26),
                       contentPadding: const EdgeInsets.only(left: 15, top: 18),
                       border: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(10),
@@ -79,6 +82,7 @@ class PersonDetails extends StatelessWidget {
                   keyboardType: TextInputType.phone,
                   decoration: InputDecoration(
                       hintText: "01-151515",
+                      hintStyle: TextStyle(color: Colors.black26),
                       contentPadding: const EdgeInsets.only(left: 15, top: 18),
                       border: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(10),
