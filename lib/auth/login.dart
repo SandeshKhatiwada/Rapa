@@ -77,7 +77,7 @@ class _LoginPageState extends State<LoginPage> {
                       ),
                       SizedBox(height: 10),
                       TextFormField(
-                        autovalidateMode: AutovalidateMode.always,
+                        autovalidateMode: AutovalidateMode.onUserInteraction,
                         controller: emailController,
                         onSaved: (value) {
                           emailController.text = value!;
@@ -111,7 +111,7 @@ class _LoginPageState extends State<LoginPage> {
                       ),
                       SizedBox(height: 10),
                       TextFormField(
-                        autovalidateMode: AutovalidateMode.always,
+                        autovalidateMode: AutovalidateMode.onUserInteraction,
                         controller: passwordController,
                         onSaved: (value) {
                           passwordController.text = value!;
@@ -254,7 +254,7 @@ class _LoginPageState extends State<LoginPage> {
             .signInWithEmailAndPassword(email: email, password: password)
             .then((uid) => {
                   Fluttertoast.showToast(msg: "Login Successful"),
-                  Get.off(Bottombar()),
+                  Get.offAll(Bottombar()),
                 });
       } on FirebaseAuthException catch (error) {
         switch (error.code) {
