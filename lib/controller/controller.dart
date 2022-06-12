@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:rafa/auth/login.dart';
 
 class MainController extends GetxController {
@@ -28,8 +29,39 @@ class MainController extends GetxController {
     });
   }
 
+  Send() {
+    showLoding();
+    Future.delayed(const Duration(seconds: 3), () {
+      hideLoading();
+      Get.dialog(Dialog(
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(10),
+          ),
+          child: Container(
+            height: 60,
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Text(
+                  "Image Upload succesfully",
+                  style: GoogleFonts.dmSans(
+                    fontSize: 18,
+                  ),
+                ),
+                SizedBox(width: 5),
+                Icon(
+                  Icons.check_circle,
+                  color: Color(0xFF6358DC),
+                  size: 25,
+                )
+              ],
+            ),
+          )));
+    });
+  }
+
   hideLoading() {
-    //Get.back();
+    Get.back();
   }
 }
 

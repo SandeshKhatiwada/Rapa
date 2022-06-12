@@ -137,97 +137,115 @@ class headerContainer extends StatelessWidget {
                       //)
                       InkWell(
                         onTap: () {
-                          Get.defaultDialog(
-                              title: "",
-                              content: Column(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  MaterialButton(
-                                    onPressed: () {
-                                      Get.to(Settings());
-                                    },
-                                    child: Row(
-                                      children: [
-                                        Icon(
-                                          Icons.settings,
-                                          size: 30,
-                                        ),
-                                        SizedBox(width: 10),
-                                        Text(
-                                          "Settings",
-                                          style: GoogleFonts.dmSans(
-                                            fontSize: 18,
+                          Get.dialog(Dialog(
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(10),
+                              ),
+                              child: Container(
+                                height: 100,
+                                child: Column(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    MaterialButton(
+                                      onPressed: () {
+                                        Get.to(Settingss());
+                                      },
+                                      child: Row(
+                                        children: [
+                                          Icon(
+                                            Icons.settings,
+                                            size: 30,
                                           ),
-                                        )
-                                      ],
+                                          SizedBox(width: 10),
+                                          Text(
+                                            "Settings",
+                                            style: GoogleFonts.dmSans(
+                                              fontSize: 18,
+                                            ),
+                                          )
+                                        ],
+                                      ),
                                     ),
-                                  ),
-                                  MaterialButton(
-                                    onPressed: () {
-                                      Get.defaultDialog(
-                                          title: "",
-                                          content: Text(
-                                              "Are you sure want to logout?"),
-                                          actions: [
-                                            Row(
+                                    MaterialButton(
+                                      onPressed: () {
+                                        Get.dialog(Dialog(
+                                          shape: RoundedRectangleBorder(
+                                            borderRadius:
+                                                BorderRadius.circular(10),
+                                          ),
+                                          child: Container(
+                                            height: 120,
+                                            child: Column(
                                               mainAxisAlignment:
-                                                  MainAxisAlignment
-                                                      .spaceBetween,
+                                                  MainAxisAlignment.center,
                                               children: [
-                                                Padding(
-                                                  padding:
-                                                      const EdgeInsets.only(
-                                                          left: 20),
-                                                  child: MaterialButton(
-                                                    shape:
-                                                        RoundedRectangleBorder(
+                                                Text(
+                                                    "Are you sure want to logout?",
+                                                    style: GoogleFonts.dmSans(
+                                                        fontSize: 18)),
+                                                SizedBox(height: 15),
+                                                Row(
+                                                  mainAxisAlignment:
+                                                      MainAxisAlignment
+                                                          .spaceBetween,
+                                                  children: [
+                                                    Padding(
+                                                      padding:
+                                                          const EdgeInsets.only(
+                                                              left: 20),
+                                                      child: MaterialButton(
+                                                        shape: RoundedRectangleBorder(
                                                             side: BorderSide(
                                                                 color: Colors
                                                                     .black12)),
-                                                    onPressed: () {
-                                                      controller.UserLogOut();
-                                                    },
-                                                    child: Text("Yes"),
-                                                  ),
+                                                        onPressed: () {
+                                                          controller
+                                                              .UserLogOut();
+                                                        },
+                                                        child: Text("Yes"),
+                                                      ),
+                                                    ),
+                                                    Padding(
+                                                      padding:
+                                                          const EdgeInsets.only(
+                                                              right: 20),
+                                                      child: MaterialButton(
+                                                        shape: RoundedRectangleBorder(
+                                                            side: BorderSide(
+                                                                color: Colors
+                                                                    .black12)),
+                                                        onPressed: () {
+                                                          Get.back();
+                                                        },
+                                                        child: Text("No"),
+                                                      ),
+                                                    )
+                                                  ],
                                                 ),
-                                                Padding(
-                                                  padding:
-                                                      const EdgeInsets.only(
-                                                          right: 20),
-                                                  child: MaterialButton(
-                                                    shape:
-                                                        RoundedRectangleBorder(
-                                                            side: BorderSide(
-                                                                color: Colors
-                                                                    .black12)),
-                                                    onPressed: () {
-                                                      Get.back();
-                                                    },
-                                                    child: Text("No"),
-                                                  ),
-                                                )
                                               ],
-                                            )
-                                          ]);
-                                    },
-                                    child: Row(
-                                      children: [
-                                        Icon(
-                                          Icons.logout_outlined,
-                                          size: 30,
-                                        ),
-                                        SizedBox(width: 10),
-                                        Text(
-                                          "Log Out",
-                                          style: GoogleFonts.dmSans(
-                                            fontSize: 18,
+                                            ),
                                           ),
-                                        )
-                                      ],
-                                    ),
-                                  )
-                                ],
-                              ));
+                                        ));
+                                      },
+                                      child: Row(
+                                        children: [
+                                          Icon(
+                                            Icons.logout_outlined,
+                                            size: 30,
+                                          ),
+                                          SizedBox(width: 10),
+                                          Text(
+                                            "Log Out",
+                                            style: GoogleFonts.dmSans(
+                                              fontSize: 18,
+                                            ),
+                                          )
+                                        ],
+                                      ),
+                                    )
+                                  ],
+                                ),
+                              )));
                         },
                         child: Icon(
                           Icons.account_circle_outlined,

@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:rafa/Screens/nav_screen/expenses_page.dart';
+import 'package:rafa/Screens/nav_screen/sales_page.dart';
+import 'package:rafa/Settings/settings.dart';
 
 class DrawerWidget extends StatelessWidget {
   const DrawerWidget({Key? key}) : super(key: key);
@@ -40,7 +44,9 @@ class DrawerWidget extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
                     IconButton(
-                      onPressed: () {},
+                      onPressed: () {
+                        Get.to(Sales());
+                      },
                       icon: Icon(
                         Icons.attach_money,
                         size: 35,
@@ -76,7 +82,9 @@ class DrawerWidget extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
                     IconButton(
-                      onPressed: () {},
+                      onPressed: () {
+                        Get.to(Expenses());
+                      },
                       icon: Icon(
                         Icons.monetization_on,
                         size: 35,
@@ -112,7 +120,9 @@ class DrawerWidget extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
                     IconButton(
-                      onPressed: () {},
+                      onPressed: () {
+                        Get.to(Settingss());
+                      },
                       icon: Icon(
                         Icons.settings,
                         size: 35,

@@ -7,6 +7,7 @@ import 'package:get/get.dart';
 import 'package:rafa/Screens/drawer_screen.dart';
 import 'package:rafa/Screens/nav_screen/expenses_page.dart';
 import 'package:rafa/Screens/nav_screen/sales_page.dart';
+import 'package:rafa/Settings/settings.dart';
 import 'package:rafa/models/user_model.dart';
 import '../controller/controller.dart';
 import '../widgets/custom_widgets.dart';
@@ -160,7 +161,10 @@ class _HomePageState extends State<HomePage> {
                               // iconColor: Colors.purple,
                             ),
                             homeContainer(
-                              onTap: () {},
+                              onTap: () {
+                                Get.to(Settingss());
+                              },
+
                               text: "Settings",
 
                               icon: Icon(

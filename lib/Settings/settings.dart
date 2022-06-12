@@ -13,14 +13,14 @@ import '../../controller/controller.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import '../Screens/drawer_screen.dart';
 
-class Settings extends StatefulWidget {
-  const Settings({Key? key}) : super(key: key);
+class Settingss extends StatefulWidget {
+  const Settingss({Key? key}) : super(key: key);
 
   @override
-  State<Settings> createState() => _SettingsState();
+  State<Settingss> createState() => _SettingssState();
 }
 
-class _SettingsState extends State<Settings> {
+class _SettingssState extends State<Settingss> {
   MainController controller = Get.put(MainController());
   User? user = FirebaseAuth.instance.currentUser;
   UserModel loggedInUser = UserModel();

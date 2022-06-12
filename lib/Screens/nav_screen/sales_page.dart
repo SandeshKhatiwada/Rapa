@@ -1,8 +1,11 @@
+import 'dart:io';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:rafa/models/user_model.dart';
 import 'package:rafa/widgets/custom_widgets.dart';
 import '../../controller/controller.dart';
@@ -17,6 +20,7 @@ class Sales extends StatefulWidget {
 }
 
 class _SalesState extends State<Sales> {
+  File? pickedImage;
   MainController controller = Get.put(MainController());
   User? user = FirebaseAuth.instance.currentUser;
   UserModel loggedInUser = UserModel();
@@ -32,6 +36,21 @@ class _SalesState extends State<Sales> {
       this.loggedInUser = UserModel.fromMap(value.data());
       setState(() {});
     });
+  }
+
+  pickImage(ImageSource imageType) async {
+    try {
+      final photo = await ImagePicker().pickImage(source: imageType);
+      if (photo == null) return;
+      final tempImage = File(photo.path);
+      setState(() {
+        pickedImage = tempImage;
+      });
+
+      Get.back();
+    } catch (error) {
+      debugPrint(error.toString());
+    }
   }
 
   @override
@@ -155,13 +174,19 @@ class _SalesState extends State<Sales> {
                               radius: Radius.circular(8),
                               color: Color(0xFF6358DC),
                               child: Container(
-                                height: 320,
+                                height: 350,
                                 width: double.infinity,
                                 child: Column(
                                   children: [
                                     Padding(
                                       padding: const EdgeInsets.only(top: 50),
-                                      child: Image.asset("assets/bill.png"),
+                                      child: pickedImage != null
+                                          ? Image.file(
+                                              pickedImage!,
+                                              height: 100,
+                                              width: 100,
+                                            )
+                                          : Image.asset("assets/bill.png"),
                                     ),
                                     SizedBox(height: 25),
                                     Padding(
@@ -174,7 +199,9 @@ class _SalesState extends State<Sales> {
                                                 BorderRadius.circular(7),
                                             borderSide: BorderSide(
                                                 color: Colors.black38)),
-                                        onPressed: () {},
+                                        onPressed: () {
+                                          pickImage(ImageSource.camera);
+                                        },
                                         child: Row(
                                           children: [
                                             Icon(
@@ -211,7 +238,9 @@ class _SalesState extends State<Sales> {
                                             borderRadius:
                                                 BorderRadius.circular(7)),
                                         color: Color(0xFF6358DC),
-                                        onPressed: () {},
+                                        onPressed: () {
+                                          pickImage(ImageSource.gallery);
+                                        },
                                         child: Row(
                                           children: [
                                             Transform.rotate(
@@ -245,7 +274,9 @@ class _SalesState extends State<Sales> {
                               MaterialButton(
                                 height: 40,
                                 minWidth: 100,
-                                onPressed: () {},
+                                onPressed: () {
+                                  Get.back();
+                                },
                                 shape: OutlineInputBorder(
                                     borderSide:
                                         BorderSide(color: Color(0xFF6358DC)),
@@ -263,7 +294,9 @@ class _SalesState extends State<Sales> {
                                 height: 40,
                                 minWidth: 100,
                                 color: Color(0xFF6358DC),
-                                onPressed: () {},
+                                onPressed: () {
+                                  controller.Send();
+                                },
                                 shape: OutlineInputBorder(
                                     borderSide:
                                         BorderSide(color: Color(0xFF6358DC)),
@@ -281,7 +314,8 @@ class _SalesState extends State<Sales> {
                         )
                       ],
                     ),
-                  )
+                  ),
+                  SizedBox(height: 15),
                 ]),
               ),
             )));
